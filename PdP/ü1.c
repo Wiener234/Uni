@@ -1,11 +1,6 @@
 #include<stdio.h>
 
 
-int grad(int x){
-    int c = (x -32) * 5/9;
-    printf("%d", x);
-    return 5/9 * (x - 32);
-}
 
 int main(){
 
@@ -68,8 +63,17 @@ int main(){
 //        i++;
 //    }
 
+    int i = 0;
 
-    printf("%d", grad(0));
+    printf("Farenheit\t Celsius\n");
+    while(i<=300){
+
+        int x = 5.0/9 * (i - 32);
+        printf("%5d  %15d\n",i,  x);
+
+        i+=20;
+    }
+
 
 
     return 0;
