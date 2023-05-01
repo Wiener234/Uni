@@ -18,7 +18,7 @@ int main()
 
   printf("\nx:\n%f \n%e \n%E \n%g \n%G", x, x, x, x, x);
 
-  printf("\ny:\n%g \n%G");
+  printf("\ny:\n%g \n%G", y, y);
 
   return 0;
 
