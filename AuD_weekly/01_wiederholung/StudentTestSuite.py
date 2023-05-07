@@ -10,6 +10,10 @@ class StudentTestSuite(unittest.TestCase):
 
 	def testMainFunction3(self):
 		self.assertEqual(solution.main(27), "[29, 31, 33, 35, 37]False0x1b")
+
+
+#-----------------------------------------------------Func Tests---------------------------------------------------------------------------------------
+
 		
 	def testFuncFunction1(self):
 		L = [15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26]
