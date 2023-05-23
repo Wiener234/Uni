@@ -72,16 +72,16 @@ class OSTimeline:
                 currentNode = currentNode.next
             elif currentNode.next.releaseDate == yearToRemove:
                 # check if first node needs to be removed
-                if currentNode == self.head:
+                if currentNode == self.head:#not needed but fuck it
                     #print("testBSD")
                     self.head = currentNode.next
 
                     return True											
                 # check if last node needs to be removed
-                if currentNode != self.head and currentNode.next == None:
+                if currentNode != self.head and currentNode.next == None: #also not needed why? but if it works leave it
                     return True
                 # check if node in middle of list needs to be removed
-                if currentNode != self.head and currentNode.next is not None:
+                if currentNode != self.head and currentNode.next is not None:#fucking allrounder
                     #print("remove")
                     currentNode.next = currentNode.next.next
                     return True
