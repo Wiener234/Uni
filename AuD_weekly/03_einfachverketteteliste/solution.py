@@ -22,36 +22,68 @@ class OSTimeline:
     
     	# Methode, die ein neues Element in die Timeline einfügt
     def insert(self, name, releaseDate):
+        # create new OS based on input
         newOS = OperatingSystem(name, releaseDate)
+        # set currentNode to to first object in list
         currentNode = self.head														
+
+        # edge case releaseDate befor head releaseDate
+        if(newOS.releaseDate < currentNode.releaseDate):
+            self.head = newOS
+            newOS.next = currentNode
+            return True
+        # run till no currentNode
         while(currentNode is not None):									
+            # edge case check if newOS releaseDate exists
+            # edge case check if next node exists
             if(currentNode.next == None):
                 currentNode.next = newOS
                 return True
+
+            # check if releaseDate is lower or equal then next 
             if(newOS.releaseDate <= currentNode.next.releaseDate):
+                # check if releaseDate is equal to next
                 if(newOS.releaseDate == currentNode.next.releaseDate):
+                    print("input exect error message")
                     return False
+                #---inserts newOS between to nodes---
+                # set next node for new os
                 newOS.next = currentNode.next
+                # set next node for current node 
                 currentNode.next = newOS
                 return True
+            #get next node for loop
             currentNode = currentNode.next
 
     
     	# Methode, die das übergebene Element in der Timeline löscht
     def remove(self, yearToRemove):
         currentNode = self.head
+        # check if first node needs to be removed
+        if currentNode == self.head and currentNode.releaseDate == yearToRemove:
+            #print("fuck")
+            self.head = currentNode.next
+            return True
         
         while (currentNode is not None):
-            if (currentNode.releaseDate > yearToRemove):
+            if (currentNode.next.releaseDate > yearToRemove):
                 return False
-            elif currentNode.releaseDate < yearToRemove:
+            elif currentNode.next.releaseDate < yearToRemove:
                 currentNode = currentNode.next
-            elif currentNode.releaseDate == yearToRemove:
+            elif currentNode.next.releaseDate == yearToRemove:
+                # check if first node needs to be removed
                 if currentNode == self.head:
+                    #print("testBSD")
+                    self.head = currentNode.next
+
                     return True											
+                # check if last node needs to be removed
                 if currentNode != self.head and currentNode.next == None:
                     return True
+                # check if node in middle of list needs to be removed
                 if currentNode != self.head and currentNode.next is not None:
+                    #print("remove")
+                    currentNode.next = currentNode.next.next
                     return True
         
         return False
@@ -61,33 +93,33 @@ class OSTimeline:
 # Sie können damit ihre Änderungen testen. Sie dürfen den Code beliebig anpassen, um weitere Fälle zu testen.
 # Der Code zum Testen für die StudentTestSuite wird davon nicht beeinflusst. 
 
-os1  = OperatingSystem("BSD", 1977)
-os2  = OperatingSystem("Apple DOS 3.1", 1978)
-os3  = OperatingSystem("Ms Dos", 1981)
-os4  = OperatingSystem("Linux", 1991)
-os5  = OperatingSystem("Solaris", 1992)
-os6  = OperatingSystem("Windows 95", 1995)
-os7  = OperatingSystem("Mac OS X", 2000)
-
-
-timeline = OSTimeline()
-timeline.head = os1
-timeline.head.next = os2
-os2.next = os3
-os3.next = os4
-os4.next = os5
-os5.next = os6
-os6.next = os7
+#os1  = OperatingSystem("BSD", 1977)
+#os2  = OperatingSystem("Apple DOS 3.1", 1978)
+#os3  = OperatingSystem("Ms Dos", 1981)
+#os4  = OperatingSystem("Linux", 1991)
+#os5  = OperatingSystem("Solaris", 1992)
+#os6  = OperatingSystem("Windows 95", 1995)
+#os7  = OperatingSystem("Mac OS X", 2000)
+#
+#
+#timeline = OSTimeline()
+#timeline.head = os1
+#timeline.head.next = os2
+#os2.next = os3
+#os3.next = os4
+#os4.next = os5
+#os5.next = os6
+#os6.next = os7
 
 # routine
-timeline.insert("Red Hat Linux 6.2E", 2000);		
-timeline.remove(1977);			
-timeline.remove(1994);				
-timeline.insert("Unix", 1969);				
-timeline.remove(1981);				
-timeline.insert("Mac OS X 10.4", 2005);				
-timeline.remove(2005);				
-timeline.insert("macOS Catalina", 2019);				
-timeline.remove(1995);
-timeline.insert("Windows 98", 1998);
-print(timeline.traverse());
+#timeline.insert("Red Hat Linux 6.2E", 2000);		
+#timeline.remove(1977);			
+#timeline.remove(1994);				
+#timeline.insert("Unix", 1969);				
+#timeline.remove(1981);				
+#timeline.insert("Mac OS X 10.4", 2005);				
+#timeline.remove(2005);				
+#timeline.insert("macOS Catalina", 2019);				
+#timeline.remove(1995);
+#timeline.insert("Windows 98", 1998);
+#print(timeline.traverse());
