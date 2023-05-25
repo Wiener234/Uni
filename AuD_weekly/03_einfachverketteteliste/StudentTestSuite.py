@@ -22,42 +22,42 @@ class StudentTestSuite(unittest.TestCase):
         self.os5.next = self.os6
         self.os6.next = self.os8
 
-    def testExample1(self):
+    def testExample0(self):
         self.assertFalse(self.timeline.insert("Red Hat Linux 6.2E", 2000))
 
-    def testExample2(self):
+    def testExample1(self):
         self.assertTrue(self.timeline.remove(1977))
         self.assertEqual(self.timeline.traverse(), [('Apple DOS 3.1', 1978), ('Ms Dos', 1981), ('Linux', 1991), ('Solaris', 1992), ('Windows 95', 1995), ('Mac OS X', 2000)])
 
-    def testExample3(self):
+    def testExample2(self):
         self.assertFalse(self.timeline.remove(1994))
 
-    def testExample4(self):
+    def testExample3(self):
         self.assertTrue(self.timeline.insert("Unix", 1969))
         self.assertEqual(self.timeline.traverse(), [('Unix', 1969), ("BSD", 1977), ('Apple DOS 3.1', 1978), ('Ms Dos', 1981), ('Linux', 1991), ('Solaris', 1992), ('Windows 95', 1995), ('Mac OS X', 2000)])
 
-    def testExample5(self):
+    def testExample4(self):
         self.assertTrue(self.timeline.remove(1981))
         self.assertEqual(self.timeline.traverse(), [("BSD", 1977), ('Apple DOS 3.1', 1978), ('Linux', 1991), ('Solaris', 1992), ('Windows 95', 1995), ('Mac OS X', 2000)])
 
-    def testExample6(self):
+    def testExample5(self):
         self.assertTrue(self.timeline.insert("Mac OS X 10.4", 2005))
         self.assertEqual(self.timeline.traverse(), [("BSD", 1977), ('Apple DOS 3.1', 1978), ("Ms Dos", 1981), ('Linux', 1991), ('Solaris', 1992), ('Windows 95', 1995), ('Mac OS X', 2000), ('Mac OS X 10.4', 2005)])
     
-    def testExample7(self):
+    def testExample6(self):
         self.assertTrue(self.timeline.insert("Mac OS X 10.4", 2005))
         self.assertTrue(self.timeline.remove(2005))
         self.assertEqual(self.timeline.traverse(), [("BSD", 1977), ('Apple DOS 3.1', 1978), ("Ms Dos", 1981), ('Linux', 1991), ('Solaris', 1992), ('Windows 95', 1995), ('Mac OS X', 2000)])
     
-    def testExample8(self):
+    def testExample7(self):
         self.assertTrue(self.timeline.insert("macOS Catalina", 2019))
         self.assertEqual(self.timeline.traverse(), [("BSD", 1977), ('Apple DOS 3.1', 1978), ("Ms Dos", 1981), ('Linux', 1991), ('Solaris', 1992), ('Windows 95', 1995), ('Mac OS X', 2000), ('macOS Catalina', 2019)])
     
-    def testExample9(self):
+    def testExample8(self):
         self.assertTrue(self.timeline.remove(1995))
         self.assertEqual(self.timeline.traverse(), [("BSD", 1977), ('Apple DOS 3.1', 1978), ("Ms Dos", 1981), ('Linux', 1991), ('Solaris', 1992), ('Mac OS X', 2000)])
     
-    def testExample10(self):
+    def testExample9(self):
         self.assertTrue(self.timeline.remove(1977))
         self.assertTrue(self.timeline.insert("Unix", 1969))
         self.assertTrue(self.timeline.remove(1981))
@@ -67,3 +67,9 @@ class StudentTestSuite(unittest.TestCase):
         self.assertTrue(self.timeline.remove(1995))
         self.assertTrue(self.timeline.insert("Windows 98", 1998))
         self.assertEqual(self.timeline.traverse(), [('Unix', 1969), ('Apple DOS 3.1', 1978), ('Linux', 1991), ('Solaris', 1992), ('Windows 98', 1998), ('Mac OS X', 2000), ('macOS Catalina', 2019)])
+
+    def testExample10(self):
+        self.assertFalse(self.timeline.remove(2019))
+        self.assertFalse(self.timeline.insert(None, None))
+        self.assertFalse(self.timeline.remove(None))
+

@@ -27,7 +27,15 @@ class OSTimeline:
         # set currentNode to to first object in list
         currentNode = self.head	
 
-        if(releaseDate 
+        if(self.head == None):
+            self.head = newOS
+            print("inserted")
+            return True 
+        
+
+        if(type(name) != str or type(releaseDate) != int or name == ""):
+            print("invalid year")
+            return False
 
         # edge case releaseDate befor head releaseDate
         if(newOS.releaseDate < currentNode.releaseDate):
@@ -59,38 +67,37 @@ class OSTimeline:
                 return True
             #get next node for loop
             currentNode = currentNode.next
+        return False
 
     
     	# Methode, die das übergebene Element in der Timeline löscht
     def remove(self, yearToRemove):
         currentNode = self.head
+        if(currentNode == None or currentNode.releaseDate == None):
+            print("invalid year")
+            return False
+        if(type(yearToRemove) != int):
+            print("invalid year")
+            return False
         # check if first node needs to be removed
         if currentNode == self.head and currentNode.releaseDate == yearToRemove:
             print("removed")
             self.head = currentNode.next
             return True
         
-        while (currentNode is not None):
+        while (currentNode.next is not None):
             if (currentNode.next.releaseDate > yearToRemove):
                 print("invalid year")
                 return False
-            elif currentNode.next.releaseDate < yearToRemove:
+            if currentNode.next.releaseDate < yearToRemove:
                 currentNode = currentNode.next
             elif currentNode.next.releaseDate == yearToRemove:
-                # check if first node needs to be removed
-                if currentNode == self.head:#not needed but fuck it
-                    #print("testBSD")
-                    self.head = currentNode.next
-
-                    return True											
-                # check if last node needs to be removed
-                if currentNode != self.head and currentNode.next == None: #also not needed why? but if it works leave it
-                    return True
                 # check if node in middle of list needs to be removed
                 if currentNode != self.head and currentNode.next is not None:#fucking allrounder
                     print("removed")
                     currentNode.next = currentNode.next.next
                     return True
+        print("invalid year")
         return False
         	
 
@@ -127,5 +134,5 @@ class OSTimeline:
 #timeline.insert("macOS Catalina", 2019);				
 #timeline.remove(1995);
 #timeline.insert("Windows 98", 1998);
-#timeline.remove(1200)
+#timeline.remove(2019)
 #print(timeline.traverse());
