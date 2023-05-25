@@ -25,12 +25,15 @@ class OSTimeline:
         # create new OS based on input
         newOS = OperatingSystem(name, releaseDate)
         # set currentNode to to first object in list
-        currentNode = self.head														
+        currentNode = self.head	
+
+        if(releaseDate 
 
         # edge case releaseDate befor head releaseDate
         if(newOS.releaseDate < currentNode.releaseDate):
             self.head = newOS
             newOS.next = currentNode
+            print("inserted")
             return True
         # run till no currentNode
         while(currentNode is not None):									
@@ -38,19 +41,21 @@ class OSTimeline:
             # edge case check if next node exists
             if(currentNode.next == None):
                 currentNode.next = newOS
+                print("inserted")
                 return True
 
             # check if releaseDate is lower or equal then next 
             if(newOS.releaseDate <= currentNode.next.releaseDate):
                 # check if releaseDate is equal to next
                 if(newOS.releaseDate == currentNode.next.releaseDate):
-                    print("input exect error message")
+                    print("invalid year")
                     return False
                 #---inserts newOS between to nodes---
                 # set next node for new os
                 newOS.next = currentNode.next
                 # set next node for current node 
                 currentNode.next = newOS
+                print("inserted")
                 return True
             #get next node for loop
             currentNode = currentNode.next
@@ -61,12 +66,13 @@ class OSTimeline:
         currentNode = self.head
         # check if first node needs to be removed
         if currentNode == self.head and currentNode.releaseDate == yearToRemove:
-            #print("fuck")
+            print("removed")
             self.head = currentNode.next
             return True
         
         while (currentNode is not None):
             if (currentNode.next.releaseDate > yearToRemove):
+                print("invalid year")
                 return False
             elif currentNode.next.releaseDate < yearToRemove:
                 currentNode = currentNode.next
@@ -82,10 +88,9 @@ class OSTimeline:
                     return True
                 # check if node in middle of list needs to be removed
                 if currentNode != self.head and currentNode.next is not None:#fucking allrounder
-                    #print("remove")
+                    print("removed")
                     currentNode.next = currentNode.next.next
                     return True
-        
         return False
         	
 
@@ -110,8 +115,8 @@ class OSTimeline:
 #os4.next = os5
 #os5.next = os6
 #os6.next = os7
-
-# routine
+#
+## routine
 #timeline.insert("Red Hat Linux 6.2E", 2000);		
 #timeline.remove(1977);			
 #timeline.remove(1994);				
@@ -122,4 +127,5 @@ class OSTimeline:
 #timeline.insert("macOS Catalina", 2019);				
 #timeline.remove(1995);
 #timeline.insert("Windows 98", 1998);
+#timeline.remove(1200)
 #print(timeline.traverse());
