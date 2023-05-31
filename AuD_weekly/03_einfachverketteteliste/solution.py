@@ -5,13 +5,14 @@ class OperatingSystem:
         self.releaseDate = date
         self.next = None
 
+
 class OSTimeline:
     # Konstruktor
     def __init__(self):
         self.head = None
-    
-    	# Methode, die die Timeline durchläuft und eine Liste der enthaltenen Betriebssysteme zurückgibt
-    	# ACHTUNG: Ändern Sie diese Methode nicht, da Ihnen die Student-Test-Suite ansonsten ein falsches Ergebnis liefern kann!
+
+        # Methode, die die Timeline durchläuft und eine Liste der enthaltenen Betriebssysteme zurückgibt
+        # ACHTUNG: Ändern Sie diese Methode nicht, da Ihnen die Student-Test-Suite ansonsten ein falsches Ergebnis liefern kann!
     def traverse(self):
         L = []
         currentNode = self.head
@@ -19,32 +20,32 @@ class OSTimeline:
             L.append((currentNode.name, currentNode.releaseDate))
             currentNode = currentNode.next
         return L
-    
-    	# Methode, die ein neues Element in die Timeline einfügt
+
+
+    # Methode, die ein neues Element in die Timeline einfügt
     def insert(self, name, releaseDate):
         # create new OS based on input
         newOS = OperatingSystem(name, releaseDate)
         # set currentNode to to first object in list
-        currentNode = self.head	
+        currentNode = self.head
 
-        if(self.head == None):
+        if (self.head is None):
             self.head = newOS
             print("inserted")
-            return True 
-        
+            return True
 
-        if(type(name) != str or type(releaseDate) != int or name == ""):
+        if (type(name) != str or type(releaseDate) != int or name == ""):
             print("invalid year")
             return False
 
         # edge case releaseDate befor head releaseDate
-        if(newOS.releaseDate < currentNode.releaseDate):
+        if (newOS.releaseDate < currentNode.releaseDate):
             self.head = newOS
             newOS.next = currentNode
             print("inserted")
             return True
         # run till no currentNode
-        while(currentNode is not None):									
+        while (currentNode is not None):
             # edge case check if newOS releaseDate exists
             # edge case check if next node exists
             if(currentNode.next == None):
