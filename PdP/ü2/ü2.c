@@ -26,10 +26,10 @@
 int main(){
     int i;
     int* ptr;
-    ptr = &i;
+    ptr = &i; // & address of variable
     i = 1;
     printf("ptr: %p\n", ptr);
-    printf("ptrObject: %d\n", *ptr);
+    printf("ptrObject: %d\n", *ptr); // * value of saved object of pointer
     printf("i: %d\n", i);
     *ptr = 2;
     printf("i2: %d\n", i);
