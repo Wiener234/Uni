@@ -1,12 +1,14 @@
 #include<stdio.h>
-#include"date.h"
+
+unsigned long long explode(unsigned int m, unsigned int n){
+    unsigned long long erg;
+
+    erg = m << n;
+
+    return erg;
+}
 
 int main(){
+    printf("%llu", explode(5, 5));
 
-    date * Date;
-    
-    newDate(Date, 2000);
-    printDate(Date);
-
-    return 0;
 }
