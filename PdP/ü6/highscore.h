@@ -3,6 +3,9 @@
 #ifndef HIGHSCORE
 #define HIGHSCORE
 
+// extern für globale variable
+extern int firstYear;
+
 typedef
 struct highscore{
     date date;
