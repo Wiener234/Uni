@@ -9,12 +9,16 @@ public class UseRational {
 		int denum = Integer.parseInt(args[1]);
 
 		Rational rational = new Rational(num, denum);
+		Rational rational2 = new Rational(num, denum);
 
 		System.out.println(Gcd.gcd(num, denum));
 		System.out.println(rational.toString());
 		System.out.println(rational.toStringReduced());
 		rational.extend(3);
 		System.out.println(rational.toString());
+		rational2 = rational.mult(rational2);
+
+		System.out.println(rational2.toString());
 	}
 
 }
