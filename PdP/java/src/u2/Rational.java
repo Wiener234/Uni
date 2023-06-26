@@ -50,7 +50,9 @@ public class Rational {
 	// }
 	
 	public Rational mult(Rational rational){
-		// TODO: Aufgabe 6 
+		rational.num = this.num * rational.num;
+		rational.denum = this.denum * rational.denum;
+		rational.reduce();
 		return rational;
 	}
 
