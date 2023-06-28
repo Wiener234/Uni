@@ -1,13 +1,13 @@
 package u3;
 
-abstract class Figure {
+public abstract class Figure {
 	private Point point;
 
-	private Figure(){
+	protected Figure(){
 		this.point = new Point();
 	}
 
-	private Figure(int x, int y, int size){
+	protected Figure(int x, int y){
 		this.point = new Point(x, y);
 	}
 
@@ -19,11 +19,15 @@ abstract class Figure {
 		this.point.moveRel(x, y);
 	}
 
-	abstract int getSize();
-	
-	abstract void setSize(int size);
+	public Point getPoint(){
+		return point;
+	}
 
-	abstract int calcArea();
+	public abstract int getSize();
+	
+	public abstract void setSize(int size);
+
+	public abstract double calcArea();
 	 
-	abstract int calcCircumference();
+	public abstract double calcCircumference();
 }

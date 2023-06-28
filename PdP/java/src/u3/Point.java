@@ -14,20 +14,20 @@ public class Point {
 		this.y = y;
 	}
 
-	getX(){
+	public int getX(){
 		return this.x;
 	}
 
-	getY(){
+	public int getY(){
 		return this.y;
 	}
 
-	moveAbs(int x, int y){
+	public void moveAbs(int x, int y){
 		this.x = x;
 		this.y = y;
 	}
 
-	moveRel(int x, int y){
+	public void moveRel(int x, int y){
 		this.x += x;
 		this.y += y;
 	}

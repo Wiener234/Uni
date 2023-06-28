@@ -3,19 +3,33 @@ package u3;
 public class Square extends Figure{
 	private int side;
 
-	private Figure(){
+	public Square(){
 		super();
-		this.side = 0;
 	}
 
-	private Figure(int x, int y){
-		super(x,y);
-		this.side
+	public Square(int side){
+		this.side = side;
 	}
 	
-	private Figure(side){
-		super();
+	public Square(int x, int y, int side){
+		super(x, y);
 		this.side = side;
+	}
+
+	public int getSize(){
+		return this.side;
+	}
+
+	public void setSize(int side){
+		this.side = side;
+	}
+
+	public double calcArea(){
+		return this.side * this.side;
+	}
+
+	public double calcCircumference(){
+		return this.side * 4;
 	}
 
 
