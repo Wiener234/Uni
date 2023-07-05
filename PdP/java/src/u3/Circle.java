@@ -4,17 +4,17 @@ package u3;
 public class Circle extends Figure{
 	private int radius;
 
-	Circle(){
+	public Circle(){
 		super();
 		this.radius = 0;
 	}
 
-	Circle(int radius){
+	public Circle(int radius){
 		super();
 		this.radius = radius;
 	}
 
-	Circle(int x, int y, int radius){
+	public Circle(int x, int y, int radius){
 		super(x, y);
 		this.radius = radius;
 	}

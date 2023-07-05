@@ -2,15 +2,15 @@ package u3;
 
 public class Circ extends Square{
 
-	Circ(){
+	public Circ(){
 		super();
 	}
 
-	Circ(int radius){
+	public Circ(int radius){
 		super(radius);
 	}
 
-	Circ(int x, int y, int radius){
+	public Circ(int x, int y, int radius){
 		super(x, y, radius);
 	}
 

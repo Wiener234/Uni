@@ -20,7 +20,7 @@ public abstract class Figure {
 	}
 
 	public Point getPoint(){
-		return point;
+		return this.point;
 	}
 
 	public abstract int getSize();

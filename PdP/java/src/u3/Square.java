@@ -16,6 +16,11 @@ public class Square extends Figure{
 		this.side = side;
 	}
 
+	public Square(Square square){
+		super(square.getPoint().getX(), square.getPoint().getY());
+		this.side = square.side;
+	}
+
 	public int getSize(){
 		return this.side;
 	}
@@ -30,6 +35,10 @@ public class Square extends Figure{
 
 	public double calcCircumference(){
 		return this.side * 4;
+	}
+
+	public void show(){
+		System.out.println(this.getPoint().getX() + "," + this.getPoint().getY()  + "," + this.side);
 	}
 
 
