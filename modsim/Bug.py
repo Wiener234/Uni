@@ -1,73 +1,208 @@
 import pygame
 import kruskal
 import random
+import numpy as np
+import csv
 
-grid = kruskal.Kruskal(6,6)
-m = grid.generate()
+fields = ["Iteration", "Size", "Iterateion in size", "Maze", "Order of Steps", "Time", "Steps"]
 
+row = []
 
-pygame.init()
-screen = pygame.display.set_mode((900,900))
-clock = pygame.time.Clock()
-running = True
+x = 60
+y = 60
 
-mgridx = 0
-mgridy = 0
-
-gridsize = 24
-
-screen.fill("white")
-
-for row in m:
-    if row == '\n':
-        mgridy += gridsize
-        mgridx = 0
-        continue
-    if row == '#':
-        pygame.draw.rect(screen, "black", pygame.Rect(mgridx, mgridy, gridsize, gridsize))
-
-    mgridx += gridsize
-
-srandx = random.randint(1,36)
-srandy = random.randint(1,4)
+grid = kruskal.Kruskal(x,y)
+mar = grid.generate()
+m = grid.out()
+np.savetxt("test", mar, fmt="%1d")
 
 
-if srandy == 1:
-    pygame.draw.rect(screen, "green", pygame.Rect(srandx * gridsize, gridsize, gridsize, gridsize))
-elif srandy == 2:
-    pygame.draw.rect(screen, "green", pygame.Rect(24*36-gridsize, srandx * gridsize, gridsize, gridsize))
-elif srandy == 3:
-    pygame.draw.rect(screen, "green", pygame.Rect(srandx * gridsize, 24*36-gridsize, gridsize, gridsize))
-elif srandy == 4:
-    pygame.draw.rect(screen, "green", pygame.Rect(gridsize, srandx * gridsize, gridsize, gridsize))
+start = [2,2]
+end = [x*2,y*2]
+bug = start
 
-srandx = random.randint(1,36)
-srandy = random.randint(1,4)
+time = 0
+steps = 0
 
 
-if srandy == 1:
-    pygame.draw.rect(screen, "red", pygame.Rect(srandx * gridsize, gridsize, gridsize, gridsize))
-elif srandy == 2:
-    pygame.draw.rect(screen, "red", pygame.Rect(24*36-gridsize, srandx * gridsize, gridsize, gridsize))
-elif srandy == 3:
-    pygame.draw.rect(screen, "red", pygame.Rect(srandx * gridsize, 24*36-gridsize, gridsize, gridsize))
-elif srandy == 4:
-    pygame.draw.rect(screen, "red", pygame.Rect(gridsize, srandx * gridsize, gridsize, gridsize))
+while end != bug:
+    turn = random.randint(0,3)
+ 
+    #move
+    if turn == 0:
+        if mar[bug[0]][bug[1]+1] == 0 and mar[bug[0]][bug[1]+2] == 0: #right
+            bug = [bug[0], bug[1]+2]
+            time += 1
+        elif mar[bug[0]+1][bug[1]] == 0 and mar[bug[0]+2][bug[1]] == 0: #down
+            bug = [bug[0]+2, bug[1]]
+            time += 2
+        elif mar[bug[0]][bug[1]-1] == 0 and mar[bug[0]][bug[1]-2] == 0: #left
+            bug = [bug[0], bug[1]-2]
+            time += 3
+        elif mar[bug[0]-1][bug[1]] == 0 and mar[bug[0]-2][bug[1]] == 0: #up
+            bug = [bug[0]-2, bug[1]]
+            time += 4
+    elif turn == 1:
+        if mar[bug[0]+1][bug[1]] == 0 and mar[bug[0]+2][bug[1]] == 0: #down
+            bug = [bug[0]+2, bug[1]]
+            time += 1
+        elif mar[bug[0]][bug[1]-1] == 0 and mar[bug[0]][bug[1]-2] == 0: #left
+            bug = [bug[0], bug[1]-2]
+            time += 2
+        elif mar[bug[0]-1][bug[1]] == 0 and mar[bug[0]-2][bug[1]] == 0: #up
+            bug = [bug[0]-2, bug[1]]
+            time += 3
+        elif mar[bug[0]][bug[1]+1] == 0 and mar[bug[0]][bug[1]+2] == 0: #right
+            bug = [bug[0], bug[1]+2]
+            time += 4
+    elif turn == 2:
+        if mar[bug[0]][bug[1]-1] == 0 and mar[bug[0]][bug[1]-2] == 0: #left
+            bug = [bug[0], bug[1]-2]
+            time += 1
+        elif mar[bug[0]-1][bug[1]] == 0 and mar[bug[0]-2][bug[1]] == 0: #up
+            bug = [bug[0]-2, bug[1]]
+            time += 2
+        elif mar[bug[0]][bug[1]+1] == 0 and mar[bug[0]][bug[1]+2] == 0: #right
+            bug = [bug[0], bug[1]+2]
+            time += 3
+        elif mar[bug[0]+1][bug[1]] == 0 and mar[bug[0]+2][bug[1]] == 0: #down
+            bug = [bug[0]+2, bug[1]]
+            time += 4
+    elif turn == 3:
+        if mar[bug[0]-1][bug[1]] == 0 and mar[bug[0]-2][bug[1]] == 0: #up
+            bug = [bug[0]-2, bug[1]]
+            time += 1
+        elif mar[bug[0]][bug[1]+1] == 0 and mar[bug[0]][bug[1]+2] == 0: #right
+            bug = [bug[0], bug[1]+2]
+            time += 2
+        elif mar[bug[0]+1][bug[1]] == 0 and mar[bug[0]+2][bug[1]] == 0: #down
+            bug = [bug[0]+2, bug[1]]
+            time += 3
+        elif mar[bug[0]][bug[1]-1] == 0 and mar[bug[0]][bug[1]-2] == 0: #left
+            bug = [bug[0], bug[1]-2]
+            time += 4
+ 
+    steps += 1
 
 
 
 
-while running:
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            running = False
 
 
 
 
 
-    pygame.display.flip()
 
-    clock.tick(60)
 
-pygame.quit()
+#pygame.init()
+#screen = pygame.display.set_mode((900,900))
+#clock = pygame.time.Clock()
+#running = True
+
+#mgridx = 0
+#mgridy = 0
+
+#gridsize = 24
+
+
+
+
+
+#while running:
+#    for event in pygame.event.get():
+#        if event.type == pygame.QUIT:
+#            running = False
+
+#    #grid
+#    screen.fill("white")
+    
+#    for row in m:
+#        if row == '\n':
+#            mgridy += gridsize
+#            mgridx = 0
+#            continue
+#        if row == '#':
+#            pygame.draw.rect(screen, "black", pygame.Rect(mgridx, mgridy, gridsize, gridsize))
+    
+#        mgridx += gridsize
+#    mgridx = 0
+#    mgridy = 0
+
+#    turn = random.randint(0,3)
+#    # move
+#    if turn == 0:
+#        if mar[bug[0]][bug[1]+1] == 0 and mar[bug[0]][bug[1]+2] == 0: #right
+#            bug = [bug[0], bug[1]+2]
+#            time += 1
+#        elif mar[bug[0]+1][bug[1]] == 0 and mar[bug[0]+2][bug[1]] == 0: #down
+#            bug = [bug[0]+2, bug[1]]
+#            time += 2
+#        elif mar[bug[0]][bug[1]-1] == 0 and mar[bug[0]][bug[1]-2] == 0: #left
+#            bug = [bug[0], bug[1]-2]
+#            time += 3
+#        elif mar[bug[0]-1][bug[1]] == 0 and mar[bug[0]-2][bug[1]] == 0: #up
+#            bug = [bug[0]-2, bug[1]]
+#            time += 4
+#    elif turn == 1:
+#        if mar[bug[0]+1][bug[1]] == 0 and mar[bug[0]+2][bug[1]] == 0: #down
+#            bug = [bug[0]+2, bug[1]]
+#            time += 1
+#        elif mar[bug[0]][bug[1]-1] == 0 and mar[bug[0]][bug[1]-2] == 0: #left
+#            bug = [bug[0], bug[1]-2]
+#            time += 2
+#        elif mar[bug[0]-1][bug[1]] == 0 and mar[bug[0]-2][bug[1]] == 0: #up
+#            bug = [bug[0]-2, bug[1]]
+#            time += 3
+#        elif mar[bug[0]][bug[1]+1] == 0 and mar[bug[0]][bug[1]+2] == 0: #right
+#            bug = [bug[0], bug[1]+2]
+#            time += 4
+#    elif turn == 2:
+#        if mar[bug[0]][bug[1]-1] == 0 and mar[bug[0]][bug[1]-2] == 0: #left
+#            bug = [bug[0], bug[1]-2]
+#            time += 1
+#        elif mar[bug[0]-1][bug[1]] == 0 and mar[bug[0]-2][bug[1]] == 0: #up
+#            bug = [bug[0]-2, bug[1]]
+#            time += 2
+#        elif mar[bug[0]][bug[1]+1] == 0 and mar[bug[0]][bug[1]+2] == 0: #right
+#            bug = [bug[0], bug[1]+2]
+#            time += 3
+#        elif mar[bug[0]+1][bug[1]] == 0 and mar[bug[0]+2][bug[1]] == 0: #down
+#            bug = [bug[0]+2, bug[1]]
+#            time += 4
+#    elif turn == 3:
+#        if mar[bug[0]-1][bug[1]] == 0 and mar[bug[0]-2][bug[1]] == 0: #up
+#            bug = [bug[0]-2, bug[1]]
+#            time += 1
+#        elif mar[bug[0]][bug[1]+1] == 0 and mar[bug[0]][bug[1]+2] == 0: #right
+#            bug = [bug[0], bug[1]+2]
+#            time += 2
+#        elif mar[bug[0]+1][bug[1]] == 0 and mar[bug[0]+2][bug[1]] == 0: #down
+#            bug = [bug[0]+2, bug[1]]
+#            time += 3
+#        elif mar[bug[0]][bug[1]-1] == 0 and mar[bug[0]][bug[1]-2] == 0: #left
+#            bug = [bug[0], bug[1]-2]
+#            time += 4
+    
+#    steps += 1
+
+
+#    # start finish
+#    pygame.draw.rect(screen, "green", pygame.Rect(start[0] * gridsize, start[1] * gridsize, gridsize, gridsize))
+#    pygame.draw.rect(screen, "red", pygame.Rect(end[0] * gridsize, end[1] * gridsize, gridsize, gridsize))
+  
+
+#    #bug
+#    pygame.draw.rect(screen, "magenta", pygame.Rect(bug[1] * gridsize, bug[0] * gridsize, gridsize, gridsize))
+
+
+
+#    pygame.display.flip()
+#    if bug == end:
+#        running = False
+
+#    clock.tick(100000)
+
+#pygame.quit()
+
+print("Time: ", time)
+print("Steps: ", steps)
