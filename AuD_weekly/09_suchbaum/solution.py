@@ -6,6 +6,7 @@ class OperatingSystem:
         self.left = None
         self.right = None
         self.balance = None
+        self.height = None
 
     # Destruktor
     def __del__(self):
@@ -40,21 +41,55 @@ class OperatingSystem:
 
 
     def determineBalanceFactors(self, balanceFactors=None):
+
+        if balanceFactors == None:
+            balanceFactors = []
+
+
+
         if self.left:
-            self.left.determineBalanceFactors()
+            self.left.determineBalanceFactors(balanceFactors)
         if self.right:
-            self.right.determineBalanceFactors()
+            self.right.determineBalanceFactors(balanceFactors)
         if self.balance == None:
             self.balance = 0
+            self.height = 1
         if self.left != None and self.right != None:
-            self.balance = abs(self.left.balance) - self.right.balance
-            print(self.name, self.balance)
-            return 
+            if self.left.height < self.right.height:
+                self.height = self.right.height + 1
+            else:
+                self.height = self.left.height + 1
+
+            self.balance = self.left.height - self.right.height
+            balanceFactors.append((self.name, self.balance))
+            return balanceFactors
         if self.left != None:
-            self.balance = abs(self.left.balance) + 1
+            self.height = self.left.height + 1
+            self.balance = self.left.height
         if self.right != None:
-            self.balance = self.right.balance - 1
-        print(self.name, self.balance)
+            self.height = self.right.height + 1
+            self.balance = -self.right.height
+
+        balanceFactors.append((self.name, self.balance))
+
+
+
+        return balanceFactors
+        
+
+
+        # if self.balance == None:
+        #     self.balance = 0
+        # if self.left != None and self.right != None:
+        #     self.balance = abs(self.left.balance) - self.right.balance
+        #     balanceFactors.append((self.name, self.balance))
+        #     # print(self.name, self.balance)
+        # if self.left != None:
+        #     self.balance = abs(self.left.balance) + 1
+        # if self.right != None:
+        #     self.balance = self.right.balance - 1
+        # return balanceFactors.append((self.name, self.balance))
+        # print(self.name, self.balance)
 
 
 
