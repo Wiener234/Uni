@@ -13,7 +13,8 @@ left = "left"
 right = "right"
 
 iter = 0
-for i in range(3, 11):
+for i in range(3, 51):
+    print(i)
     j = 0
     L = []
     while j < 100:
@@ -44,70 +45,70 @@ for i in range(3, 11):
                 if mar[bug[0]][bug[1]+1] == 0 and mar[bug[0]][bug[1]+2] == 0: #right
                     bug = [bug[0], bug[1]+2]
                     time += 1
-                    turns.append([turn, right])
+                    # turns.append([turn, right])
                 elif mar[bug[0]+1][bug[1]] == 0 and mar[bug[0]+2][bug[1]] == 0: #down
                     bug = [bug[0]+2, bug[1]]
                     time += 2
-                    turns.append([turn, down])
+                    # turns.append([turn, down])
                 elif mar[bug[0]][bug[1]-1] == 0 and mar[bug[0]][bug[1]-2] == 0: #left
                     bug = [bug[0], bug[1]-2]
                     time += 3
-                    turns.append([turn, left])
+                    # turns.append([turn, left])
                 elif mar[bug[0]-1][bug[1]] == 0 and mar[bug[0]-2][bug[1]] == 0: #up
                     bug = [bug[0]-2, bug[1]]
                     time += 4
-                    turns.append([turn, right])
+                    # turns.append([turn, right])
             elif turn == 1:
                 if mar[bug[0]+1][bug[1]] == 0 and mar[bug[0]+2][bug[1]] == 0: #down
                     bug = [bug[0]+2, bug[1]]
                     time += 1
-                    turns.append([turn, down])
+                    # turns.append([turn, down])
                 elif mar[bug[0]][bug[1]-1] == 0 and mar[bug[0]][bug[1]-2] == 0: #left
                     bug = [bug[0], bug[1]-2]
                     time += 2
-                    turns.append([turn, left])
+                    # turns.append([turn, left])
                 elif mar[bug[0]-1][bug[1]] == 0 and mar[bug[0]-2][bug[1]] == 0: #up
                     bug = [bug[0]-2, bug[1]]
                     time += 3
-                    turns.append([turn, up])
+                    # turns.append([turn, up])
                 elif mar[bug[0]][bug[1]+1] == 0 and mar[bug[0]][bug[1]+2] == 0: #right
                     bug = [bug[0], bug[1]+2]
                     time += 4
-                    turns.append([turn, right])
+                    # turns.append([turn, right])
             elif turn == 2:
                 if mar[bug[0]][bug[1]-1] == 0 and mar[bug[0]][bug[1]-2] == 0: #left
                     bug = [bug[0], bug[1]-2]
                     time += 1
-                    turns.append([turn, left])
+                    # turns.append([turn, left])
                 elif mar[bug[0]-1][bug[1]] == 0 and mar[bug[0]-2][bug[1]] == 0: #up
                     bug = [bug[0]-2, bug[1]]
                     time += 2
-                    turns.append([turn, up])
+                    # turns.append([turn, up])
                 elif mar[bug[0]][bug[1]+1] == 0 and mar[bug[0]][bug[1]+2] == 0: #right
                     bug = [bug[0], bug[1]+2]
                     time += 3
-                    turns.append([turn, right])
+                    # turns.append([turn, right])
                 elif mar[bug[0]+1][bug[1]] == 0 and mar[bug[0]+2][bug[1]] == 0: #down
                     bug = [bug[0]+2, bug[1]]
                     time += 4
-                    turns.append([turn, down])
+                    # turns.append([turn, down])
             elif turn == 3:
                 if mar[bug[0]-1][bug[1]] == 0 and mar[bug[0]-2][bug[1]] == 0: #up
                     bug = [bug[0]-2, bug[1]]
                     time += 1
-                    turns.append([turn, up])
+                    # turns.append([turn, up])
                 elif mar[bug[0]][bug[1]+1] == 0 and mar[bug[0]][bug[1]+2] == 0: #right
                     bug = [bug[0], bug[1]+2]
                     time += 2
-                    turns.append([turn, right])
+                    # turns.append([turn, right])
                 elif mar[bug[0]+1][bug[1]] == 0 and mar[bug[0]+2][bug[1]] == 0: #down
                     bug = [bug[0]+2, bug[1]]
                     time += 3
-                    turns.append([turn, down])
+                    # turns.append([turn, down])
                 elif mar[bug[0]][bug[1]-1] == 0 and mar[bug[0]][bug[1]-2] == 0: #left
                     bug = [bug[0], bug[1]-2]
                     time += 4
-                    turns.append([turn, left])
+                    # turns.append([turn, left])
          
             steps += 1
         L.append({'Iteration' : iter, 'Size' : i,'Iteration of Size' : j, 'Time' : time, 'Steps' : steps, 'Order of Steps' : turns,'Maze' : mar})
@@ -124,8 +125,7 @@ for i in range(3, 11):
         csvwrite = csv.DictWriter(csvfile, fieldnames=fields)
         csvwrite.writeheader()
         for _row in row:
-            for _col in _row:
-                csvwrite.writerow(_col)
+            csvwrite.writerows(_row)
     row = []
 
 
